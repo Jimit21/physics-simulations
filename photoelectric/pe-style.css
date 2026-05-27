@@ -1,0 +1,37 @@
+/* ============================================================
+   PHOTOELECTRIC EFFECT — Specific Styles
+   ============================================================ */
+
+/* Canvas gradient background */
+#pe-canvas {
+    background: radial-gradient(ellipse at 30% 50%, #0d1f3c 0%, #080d1a 70%);
+}
+
+/* Floating info panel on canvas */
+.canvas-info-overlay {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(15, 23, 42, 0.82);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    border-radius: 12px;
+    padding: 0.6rem 0.9rem;
+    pointer-events: none;
+}
+
+/* Emission status glow when active */
+.result-card.glowing {
+    border-color: rgba(34, 197, 94, 0.4);
+    box-shadow: 0 0 12px rgba(34, 197, 94, 0.15);
+}
+.result-card.glowing .result-value { color: #22c55e; }
+
+/* Light beam colour preview */
+#freq-hint {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    margin-top: 0.25rem;
+}
