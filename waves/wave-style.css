@@ -1,0 +1,55 @@
+/* Wave Superposition — specific styles */
+
+#wave-canvas {
+    background: #080d1a;
+}
+
+/* Toggle switches */
+.toggle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.toggle-row:last-child { border-bottom: none; }
+.toggle-label { font-size: 0.78rem; color: var(--text-grey); }
+
+.toggle-switch { position: relative; display: inline-block; width: 36px; height: 20px; cursor: pointer; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-track {
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.12);
+    transition: all 0.25s ease;
+}
+.toggle-track::before {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    transition: all 0.25s ease;
+}
+.toggle-switch input:checked + .toggle-track { background: rgba(56,189,248,0.3); border-color: rgba(56,189,248,0.5); }
+.toggle-switch input:checked + .toggle-track::before { transform: translateX(16px); background: var(--accent-blue); }
+
+/* Preset list */
+.preset-list { display: flex; flex-direction: column; gap: 0.4rem; }
+.wave-preset-btn {
+    width: 100%;
+    padding: 0.45rem 0.75rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-sm);
+    color: var(--text-grey);
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+    transition: var(--transition);
+    font-family: 'Outfit', sans-serif;
+}
+.wave-preset-btn:hover { background: rgba(56,189,248,0.1); border-color: rgba(56,189,248,0.25); color: var(--accent-blue); }
