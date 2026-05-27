@@ -1,4 +1,4 @@
-# ️ Physics Simulations — by Jimit Pandya
+#  Physics Simulations — by Jimit Pandya
 
 > **Interactive physics simulations for students.**
 > Developed to provide visual, interactive learning tools for physics education.
@@ -29,7 +29,7 @@
 
 ---
 
-## ️ Tech Stack
+##  Tech Stack
 
 ```
 HTML5 Canvas    — Custom simulation rendering
