@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photoelectric Effect Simulator — by Jimit Pandya</title>
+    <meta name="description" content="Interactive Photoelectric Effect simulation. Explore how light frequency and intensity affect photocurrent, stopping potential, and kinetic energy of photoelectrons. Built by Jimit Pandya, MSc Physics.">
+    <meta name="author" content="Jimit Pandya">
+    <link rel="canonical" href="https://Jimit21.github.io/physics-simulations/photoelectric/">
+    <meta property="og:title" content="Photoelectric Effect Simulator — Jimit Pandya">
+    <meta property="og:description" content="Interactive simulation of Einstein's Photoelectric Effect. Change frequency, intensity, metal type and watch the physics happen live.">
+    <meta property="og:type" content="website">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/style.css">
+    <link rel="stylesheet" href="pe-style.css">
+</head>
+<body>
+
+    <!-- WATERMARK -->
+    <div class="watermark" aria-hidden="true">jimitportal.web.app</div>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="header-logo">
+                <a href="../index.html" class="back-link">← All Simulations</a>
+                <div class="logo-divider"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Photoelectric Effect</span>
+                    <span class="logo-sub">Einstein's Nobel Prize, Visualised</span>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="https://jimitportal.web.app" target="_blank" rel="noopener" class="nav-link">🎓 My Portal</a>
+                <a href="https://github.com/Jimit21/physics-simulations" target="_blank" rel="noopener" class="nav-link">⭐ GitHub</a>
+                <a href="https://jimitportal.web.app/booking.html" target="_blank" rel="noopener" class="nav-link nav-link-cta">📩 Book Session</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="sim-layout">
+
+        <!-- LEFT PANEL -->
+        <aside class="control-panel">
+
+            <section class="panel-section">
+                <h3 class="section-title">🔬 Experiment Setup</h3>
+
+                <!-- Metal selector -->
+                <div class="control-group">
+                    <label class="control-label">Metal (Cathode)</label>
+                    <div class="metal-selector" id="metal-selector">
+                        <button class="metal-btn active" data-metal="sodium" title="Work function: 2.3 eV">Na<span>Sodium</span></button>
+                        <button class="metal-btn" data-metal="zinc" title="Work function: 4.3 eV">Zn<span>Zinc</span></button>
+                        <button class="metal-btn" data-metal="copper" title="Work function: 4.7 eV">Cu<span>Copper</span></button>
+                        <button class="metal-btn" data-metal="platinum" title="Work function: 5.6 eV">Pt<span>Platinum</span></button>
+                    </div>
+                </div>
+
+                <!-- Frequency slider -->
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label class="slider-label">Frequency (× 10¹⁴ Hz)</label>
+                        <span class="slider-value" id="freq-val">6.0</span>
+                    </div>
+                    <input type="range" class="slider" id="freq-slider" min="3" max="12" step="0.1" value="6.0">
+                    <div class="slider-hint" id="freq-hint">Visible green light</div>
+                </div>
+
+                <!-- Intensity slider -->
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label class="slider-label">Intensity (W/m²)</label>
+                        <span class="slider-value" id="intensity-val">50</span>
+                    </div>
+                    <input type="range" class="slider" id="intensity-slider" min="5" max="100" step="5" value="50">
+                </div>
+
+                <!-- Voltage slider -->
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label class="slider-label">Applied Voltage (V)</label>
+                        <span class="slider-value" id="voltage-val">0.0 V</span>
+                    </div>
+                    <input type="range" class="slider" id="voltage-slider" min="-5" max="5" step="0.1" value="0">
+                </div>
+            </section>
+
+            <!-- RESULTS -->
+            <section class="panel-section">
+                <h3 class="section-title">📐 Calculated Values</h3>
+                <div class="results-grid">
+                    <div class="result-card" id="result-threshold">
+                        <div class="result-label">Threshold Freq.</div>
+                        <div class="result-value" id="val-threshold">—</div>
+                        <div class="result-unit">× 10¹⁴ Hz</div>
+                    </div>
+                    <div class="result-card" id="result-ke">
+                        <div class="result-label">Max KE</div>
+                        <div class="result-value" id="val-ke">—</div>
+                        <div class="result-unit">eV</div>
+                    </div>
+                    <div class="result-card" id="result-vs">
+                        <div class="result-label">Stopping Potential</div>
+                        <div class="result-value" id="val-vs">—</div>
+                        <div class="result-unit">V</div>
+                    </div>
+                    <div class="result-card" id="result-current">
+                        <div class="result-label">Photocurrent</div>
+                        <div class="result-value" id="val-current">—</div>
+                        <div class="result-unit">μA</div>
+                    </div>
+                </div>
+
+                <!-- Status badge -->
+                <div class="emission-status" id="emission-status">
+                    <span class="status-dot" id="status-dot"></span>
+                    <span class="status-text" id="status-text">Checking...</span>
+                </div>
+            </section>
+
+            <!-- GRAPH SELECTOR -->
+            <section class="panel-section">
+                <h3 class="section-title">📊 NCERT Graphs</h3>
+                <div class="graph-tabs">
+                    <button class="graph-tab active" data-graph="iv">I vs V</button>
+                    <button class="graph-tab" data-graph="if">I vs ν</button>
+                    <button class="graph-tab" data-graph="vsf">Vs vs ν</button>
+                    <button class="graph-tab" data-graph="kef">KE vs ν</button>
+                </div>
+                <canvas id="ncert-graph" width="220" height="160"></canvas>
+                <div class="graph-legend" id="graph-legend"></div>
+            </section>
+
+            <div class="panel-credit">
+                <p>Built by <a href="https://jimitportal.web.app" target="_blank" rel="noopener">Jimit Pandya</a></p>
+                <p>MSc Physics • NCERT Class 12 Ch. 11</p>
+                <a href="https://github.com/Jimit21/physics-simulations" target="_blank" rel="noopener" class="github-star-btn">⭐ Star on GitHub</a>
+            </div>
+        </aside>
+
+        <!-- RIGHT: SIMULATION CANVAS -->
+        <div class="canvas-wrapper">
+            <canvas id="pe-canvas"></canvas>
+
+            <!-- INFO OVERLAY -->
+            <div class="formula-overlay">
+                <div class="formula-chip" id="formula-einstein">
+                    <span class="formula-name">Einstein's Equation:</span>
+                    <span class="formula-text">KE<sub>max</sub> = hν − φ</span>
+                </div>
+                <div class="formula-chip" id="formula-stopping">
+                    <span class="formula-name">Stopping Potential:</span>
+                    <span class="formula-text">eV<sub>s</sub> = hν − φ</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- PHYSICS EXPLANATION -->
+    <section class="explainer-section">
+        <div class="explainer-inner">
+            <h2 class="explainer-title">What Is the Photoelectric Effect?</h2>
+            <div class="explainer-grid">
+                <div class="explainer-card">
+                    <div class="explainer-icon">💡</div>
+                    <h3>The Discovery</h3>
+                    <p>When light of sufficient frequency hits a metal surface, electrons are ejected. Albert Einstein explained this in 1905 using the concept of light quanta (photons), winning him the Nobel Prize in Physics.</p>
+                </div>
+                <div class="explainer-card">
+                    <div class="explainer-icon">🔑</div>
+                    <h3>The Key Rule</h3>
+                    <p>Only <strong>frequency</strong> determines if electrons are emitted (not intensity). <strong>Intensity</strong> only controls how many electrons come out per second (the current).</p>
+                </div>
+                <div class="explainer-card">
+                    <div class="explainer-icon">🧮</div>
+                    <h3>The Formula</h3>
+                    <p><strong>KE<sub>max</sub> = hν − φ</strong><br>
+                    where h = 6.626 × 10⁻³⁴ J·s (Planck's constant),
+                    ν = frequency of light, φ = work function of metal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <span>🔬 <strong>Photoelectric Effect Simulator</strong> — NCERT Class 12 Physics</span>
+                <span>by <a href="https://jimitportal.web.app" target="_blank" rel="noopener">Jimit Pandya</a> | MSc Physics, B.Ed</span>
+            </div>
+            <div class="footer-right">
+                <a href="https://github.com/Jimit21/physics-simulations" target="_blank" rel="noopener">⭐ GitHub</a>
+                <a href="https://jimitportal.web.app/booking.html" target="_blank" rel="noopener">📩 Hire Me</a>
+                <a href="https://jimitportal.web.app" target="_blank" rel="noopener">🎓 My Portal</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../shared/shared.js"></script>
+    <script src="pe-sim.js"></script>
+</body>
+</html>
