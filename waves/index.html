@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wave Superposition Simulator — by Jimit Pandya</title>
+    <meta name="description" content="Interactive wave superposition simulation. Visualise constructive and destructive interference, standing waves, and beats in real-time. Built by Jimit Pandya, MSc Physics.">
+    <meta name="author" content="Jimit Pandya">
+    <link rel="canonical" href="https://Jimit21.github.io/physics-simulations/waves/">
+    <meta property="og:title" content="Wave Superposition Simulator — Jimit Pandya">
+    <meta property="og:description" content="See constructive and destructive interference happen in real-time. Drag sliders and watch waves superpose live.">
+    <meta property="og:type" content="website">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/style.css">
+    <link rel="stylesheet" href="wave-style.css">
+</head>
+<body>
+
+    <div class="watermark" aria-hidden="true">jimitportal.web.app</div>
+
+    <a href="https://jimitportal.web.app/booking.html" target="_blank" rel="noopener" class="hire-me-btn">🚀 Book a Session</a>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="header-logo">
+                <a href="../index.html" class="back-link">← All Simulations</a>
+                <div class="logo-divider"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Wave Superposition</span>
+                    <span class="logo-sub">Interference & Standing Waves</span>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="https://jimitportal.web.app" target="_blank" rel="noopener" class="nav-link">🎓 My Portal</a>
+                <a href="https://github.com/Jimit21/physics-simulations" target="_blank" rel="noopener" class="nav-link">⭐ GitHub</a>
+                <a href="https://jimitportal.web.app/booking.html" target="_blank" rel="noopener" class="nav-link nav-link-cta">📩 Book Session</a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="https://jimitportal.web.app" target="_blank" rel="noopener">🎓 My Portal</a>
+        <a href="https://github.com/Jimit21/physics-simulations" target="_blank" rel="noopener">⭐ GitHub</a>
+        <a href="https://jimitportal.web.app/booking.html" target="_blank" rel="noopener">📩 Book Session</a>
+    </div>
+
+    <main class="sim-layout">
+        <aside class="control-panel">
+
+            <section class="panel-section">
+                <h3 class="section-title">🌊 Wave 1 (Blue)</h3>
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label class="slider-label">Amplitude A₁</label>
+                        <span class="slider-value" id="a1-val">1.00</span>
+                    </div>
+                    <input type="range" class="slider" id="a1-slider" min="0" max="2" step="0.05" value="1.0">
+                </div>
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label class="slider-label">Frequency f₁ (Hz)</label>
+                        <span class="slider-value" id="f1-val">1.0</span>
+                    </div>
+                    <input type="range" class="slider" id="f1-slider" min="0.5" max="5" step="0.1" value="1.0">
+                </div>
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label class="slider-label">Phase φ₁ (°)</label>
+                        <span class="slider-value" id="p1-val">0°</span>
+                    </div>
+                    <input type="range" class="slider" id="p1-slider" min="0" max="360" step="5" value="0">
+                </div>
+            </section>
+
+            <section class="panel-section">
+                <h3 class="section-title">🌊 Wave 2 (Purple)</h3>
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label class="slider-label">Amplitude A₂</label>
+                        <span class="slider-value" id="a2-val">1.00</span>
+                    </div>
+                    <input type="range" class="slider" id="a2-slider" min="0" max="2" step="0.05" value="1.0">
+                </div>
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label class="slider-label">Frequency f₂ (Hz)</label>
+                        <span class="slider-value" id="f2-val">1.0</span>
+                    </div>
+                    <input type="range" class="slider" id="f2-slider" min="0.5" max="5" step="0.1" value="1.0">
+                </div>
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label class="slider-label">Phase φ₂ (°)</label>
+                        <span class="slider-value" id="p2-val">0°</span>
+                    </div>
+                    <input type="range" class="slider" id="p2-slider" min="0" max="360" step="5" value="0">
+                </div>
+            </section>
+
+            <section class="panel-section">
+                <h3 class="section-title">⚙️ Display</h3>
+                <div class="toggle-row">
+                    <label class="toggle-label">Show Wave 1</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="show-w1" checked>
+                        <span class="toggle-track"></span>
+                    </label>
+                </div>
+                <div class="toggle-row">
+                    <label class="toggle-label">Show Wave 2</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="show-w2" checked>
+                        <span class="toggle-track"></span>
+                    </label>
+                </div>
+                <div class="toggle-row">
+                    <label class="toggle-label">Show Resultant</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="show-result" checked>
+                        <span class="toggle-track"></span>
+                    </label>
+                </div>
+                <div class="toggle-row">
+                    <label class="toggle-label">Animate</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="animate-toggle" checked>
+                        <span class="toggle-track"></span>
+                    </label>
+                </div>
+                <div class="slider-group" style="margin-top:0.75rem">
+                    <div class="slider-header">
+                        <label class="slider-label">Speed</label>
+                        <span class="slider-value" id="speed-val">1.0x</span>
+                    </div>
+                    <input type="range" class="slider" id="speed-slider" min="0.1" max="3" step="0.1" value="1.0">
+                </div>
+            </section>
+
+            <section class="panel-section">
+                <h3 class="section-title">🎯 Quick Presets</h3>
+                <div class="preset-list">
+                    <button class="wave-preset-btn" data-preset="constructive">✅ Constructive</button>
+                    <button class="wave-preset-btn" data-preset="destructive">❌ Destructive</button>
+                    <button class="wave-preset-btn" data-preset="standing">📍 Standing Wave</button>
+                    <button class="wave-preset-btn" data-preset="beats">🔔 Beats</button>
+                </div>
+            </section>
+
+            <section class="panel-section">
+                <h3 class="section-title">📊 Live Values</h3>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-label">Beat Freq.</div>
+                        <div class="result-value" id="val-beat">0.0</div>
+                        <div class="result-unit">Hz</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Phase Diff.</div>
+                        <div class="result-value" id="val-phase">0°</div>
+                        <div class="result-unit"></div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Max Amp.</div>
+                        <div class="result-value" id="val-maxamp">2.00</div>
+                        <div class="result-unit">units</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Type</div>
+                        <div class="result-value" id="val-type" style="font-size:0.7rem">—</div>
+                        <div class="result-unit"></div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="panel-credit">
+                <p>Built by <a href="https://jimitportal.web.app" target="_blank" rel="noopener">Jimit Pandya</a></p>
+                <p>MSc Physics • Wave Mechanics</p>
+                <a href="https://github.com/Jimit21/physics-simulations" target="_blank" rel="noopener" class="github-star-btn">⭐ Star on GitHub</a>
+            </div>
+        </aside>
+
+        <div class="canvas-wrapper" id="wave-canvas-wrapper">
+            <canvas id="wave-canvas"></canvas>
+            <div class="formula-overlay">
+                <div class="formula-chip">
+                    <span class="formula-name">Superposition:</span>
+                    <span class="formula-text">y = y₁ + y₂</span>
+                </div>
+                <div class="formula-chip" id="formula-type-chip">
+                    <span class="formula-name">Wave:</span>
+                    <span class="formula-text" id="formula-type-text">y = A sin(ωt − kx + φ)</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="explainer-section">
+        <div class="explainer-inner">
+            <h2 class="explainer-title">Wave Superposition & Interference</h2>
+            <div class="explainer-grid">
+                <div class="explainer-card">
+                    <div class="explainer-icon">✅</div>
+                    <h3>Constructive Interference</h3>
+                    <p>When two waves are <strong>in phase</strong> (phase difference = 0° or 360°), their amplitudes add up: A<sub>res</sub> = A₁ + A₂. The resultant wave is larger than either individual wave.</p>
+                </div>
+                <div class="explainer-card">
+                    <div class="explainer-icon">❌</div>
+                    <h3>Destructive Interference</h3>
+                    <p>When two equal waves are <strong>out of phase</strong> (phase difference = 180°), they cancel completely: A<sub>res</sub> = 0. This is the principle behind noise-cancelling headphones!</p>
+                </div>
+                <div class="explainer-card">
+                    <div class="explainer-icon">🔔</div>
+                    <h3>Beats</h3>
+                    <p>When two waves have <strong>slightly different frequencies</strong>, the resultant amplitude oscillates at the beat frequency: f<sub>beat</sub> = |f₁ − f₂|. Used to tune musical instruments!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <span>🌊 <strong>Wave Superposition Simulator</strong> — Interactive Physics</span>
+                <span>by <a href="https://jimitportal.web.app" target="_blank" rel="noopener">Jimit Pandya</a> | MSc Physics, B.Ed</span>
+            </div>
+            <div class="footer-right">
+                <a href="https://github.com/Jimit21/physics-simulations" target="_blank" rel="noopener">⭐ GitHub</a>
+                <a href="https://jimitportal.web.app/booking.html" target="_blank" rel="noopener">📩 Hire Me</a>
+                <a href="https://jimitportal.web.app" target="_blank" rel="noopener">🎓 My Portal</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../shared/shared.js"></script>
+    <script src="wave-sim.js"></script>
+</body>
+</html>
