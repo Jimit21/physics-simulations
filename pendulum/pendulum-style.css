@@ -1,0 +1,198 @@
+/* ============================================================
+   SIMPLE PENDULUM — Specific Styles
+   ============================================================ */
+
+/* Override layout: single column centered (no side panel) */
+.pend-layout {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+}
+
+/* Canvas card */
+.pend-card {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.pend-canvas-wrap {
+    background: radial-gradient(ellipse at 50% 30%, #0d1f3c 0%, #080d1a 70%);
+    border-radius: 14px;
+    padding: 8px;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.pend-canvas-wrap canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+/* Slider controls */
+.pend-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pend-controls label {
+    font-size: 0.85rem;
+    color: var(--text-grey);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pend-controls input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: var(--transition);
+}
+
+.pend-controls input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-green), #16a34a);
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+    transition: var(--transition);
+}
+
+.pend-controls input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 14px rgba(34, 197, 94, 0.6);
+}
+
+.pend-controls input[type="range"]:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Readout panel */
+.pend-readout {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    color: var(--text-grey);
+    margin-top: 6px;
+}
+
+.pend-readout p {
+    margin: 4px 0;
+}
+
+.pend-readout strong {
+    color: var(--accent-green);
+    font-weight: 600;
+}
+
+/* Formula block */
+.pend-formula {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* Interactive badge */
+.pend-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--accent-green);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+/* Theory section */
+.pend-theory {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+}
+
+.pend-theory h3 {
+    margin: 0 0 10px;
+    font-size: 1.1rem;
+    color: var(--text-white);
+}
+
+.pend-theory p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0 0 10px;
+}
+
+.key-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(34, 197, 94, 0.05);
+    border-left: 3px solid var(--accent-green);
+    border-radius: 0 10px 10px 0;
+    margin: 10px 0;
+}
+
+.key-point .kp-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    background: rgba(34, 197, 94, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+.key-point .kp-icon::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--accent-green);
+    border-radius: 50%;
+}
+
+.key-point p {
+    margin: 0;
+    font-size: 0.85rem;
+}
+
+/* Value highlight colours */
+.val-green { color: var(--accent-green); font-weight: 700; }
+.val-gold  { color: #fbbf24; font-weight: 700; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .pend-layout {
+        padding: 1.2rem 1rem 2rem;
+    }
+}

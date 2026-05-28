@@ -1,99 +1,49 @@
-#  Physics Simulations — by Jimit Pandya
+# Physics Simulations
 
-> **Interactive physics simulations for students.**
-> Developed to provide visual, interactive learning tools for physics education.
+Interactive physics simulations built from scratch by Jimit Pandya, MSc Physics.
 
- **[Live Demo →](https://Jimit21.github.io/physics-simulations/)**
- **[My Physics Portal →](https://jimitportal.web.app)**
- **[Book a Session →](https://jimitportal.web.app/booking.html)**
+Live: https://jimit21.github.io/physics-simulations/
 
----
+Portal: https://jimitportal.web.app/
 
-##  Simulations
+## Simulations
 
-| Simulation | Description | Curriculum |
-|---|---|---|
-| [ Photoelectric Effect](./photoelectric/) | Einstein's equation live — change frequency, metal, voltage and watch electrons | CBSE Ch. 11 • IGCSE • A-Level |
-| [ Wave Superposition](./waves/) | Constructive/destructive interference, beats, standing waves | CBSE • IGCSE • A-Level |
-|  Electric Field *(coming soon)* | Point charges, dipoles, field line visualiser | CBSE Ch. 1-2 |
+### Photoelectric Effect
+Einstein's Nobel Prize experiment. Adjust frequency, intensity, and voltage across four metal cathodes. Real-time I-V and KE vs frequency graphs aligned with NCERT Class 12 Chapter 11.
 
----
+### Wave Superposition
+Two independent wave sources with configurable frequency, amplitude, and phase. Demonstrates constructive interference, destructive interference, standing waves, and beats with procedural audio synthesis via the Web Audio API.
 
-##  Features
+### Electric Field Visualizer
+Place positive and negative point charges on a canvas. Drag them in real-time and observe Coulomb field lines responding instantly. Demonstrates the superposition principle for electric fields.
 
-- **100% vanilla** — No React, no framework, no build step. Pure HTML + CSS + JS
-- **Accurate physics** — Every formula is correct, every constant is real
-- **NCERT-aligned** — Graphs match your textbook exactly  
-- **Works on mobile** — Responsive layout for all devices
-- **Free forever** — No login, no paywall, no ads
+### Projectile Motion
+Fire projectiles at configurable angles and velocities. Observe the parabolic trajectory with live calculations for range, maximum height, and flight time. Demonstrates the independence of horizontal and vertical motion components.
 
----
+### Simple Pendulum
+Adjust string length and gravitational acceleration. Watch the pendulum oscillate with a real-time KE/PE energy bar showing conservation of mechanical energy. Demonstrates the relationship between period, length, and gravity.
 
-##  Tech Stack
+## Technical Details
 
-```
-HTML5 Canvas    — Custom simulation rendering
-Web Audio API   — Procedural sound synthesis (no audio files)
-Matter.js       — Rigid body physics engine
-Vanilla CSS     — Glassmorphism dark theme
-GitHub Pages    — Free hosting
-```
+- Rendering: HTML5 Canvas with 60 FPS animation loops
+- Audio: Web Audio API for procedural sound synthesis
+- Physics: Direct numerical calculation from first principles (no physics libraries)
+- Formulas: MathJax for LaTeX-rendered equations
+- Design: Glassmorphism UI with Outfit typography
 
----
+## Curriculum Alignment
 
-##  Run Locally
+- CBSE Class 11 and 12 (NCERT)
+- IGCSE Physics
+- Cambridge A-Level Physics
+- SAT Physics Subject Test
 
-No build step needed. Just open the files:
+## License
 
-```bash
-# Option 1: Open directly
-start index.html
+Copyright (c) 2026 Jimit Pandya. All rights reserved.
 
-# Option 2: Use a local server (recommended)
-npx serve .
-# Then visit http://localhost:3000
-```
+Licensed under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0).
 
----
+The core simulation logic is obfuscated to prevent unauthorized commercial replication. The UI code and HTML structure are open for educational review.
 
-##  Publish to GitHub (No Git Required)
-
-A custom publisher script is included — no Git installation needed!
-
-```bash
-# Just run:
-node publish.js
-
-# It will ask for your GitHub token, then:
-#  Create the repository
-#  Upload all files
-#  Enable GitHub Pages
-#  Give you the live link
-```
-
->  **Security**: Your token is memory-only. Never saved to disk. Never uploaded.
-
----
-
-##  About the Author
-
-**Jimit Pandya** — MSc Physics | B.Ed
-
-I am a physics educator with over 10 years of experience. I develop these interactive simulations to provide students with dynamic visual tools that aid in the understanding of complex physical concepts.
-
--  [My Teaching Portal](https://jimitportal.web.app) — SSAT, SAT Math, Physics simulations
--  [Book a 1-on-1 Session](https://jimitportal.web.app/booking.html)
--  [More Projects on GitHub](https://github.com/Jimit21)
-
----
-
-##  License
-
-**Creative Commons BY-NC 4.0** — Free to use for education. Not for commercial resale.  
-If you use these simulations, a credit link back to [jimitportal.web.app](https://jimitportal.web.app) is appreciated! 
-
----
-
-<div align="center">
-  <sub>Developed by <a href="https://jimitportal.web.app">Jimit Pandya</a></sub>
-</div>
+For commercial licensing or integration inquiries: jimitpandya21@gmail.com

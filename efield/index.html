@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electric Field Visualizer -- by Jimit Pandya</title>
+    <meta name="description" content="Interactive electric field visualizer. Place positive and negative charges, drag them, and observe field lines responding in real-time using Coulomb's law.">
+    <meta name="author" content="Jimit Pandya">
+    <link rel="canonical" href="https://Jimit21.github.io/physics-simulations/efield/">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/style.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .sim-page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .sim-card { background: rgba(15,23,42,0.6); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 1.5rem; }
+        .sim-canvas-wrap { background: rgba(0,0,0,0.4); border-radius: 14px; padding: 8px; margin: 1rem 0; }
+        .sim-canvas-wrap canvas { width: 100%; height: auto; display: block; border-radius: 10px; }
+        .sim-controls { display: flex; flex-direction: column; gap: 10px; }
+        .sim-readout { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 10px 14px; border-radius: 10px; font-size: 0.88rem; color: #cbd5e1; }
+        .sim-readout p { margin: 4px 0; }
+        .sim-readout strong { color: #fbbf24; font-weight: 600; }
+        .sim-formula { margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.85rem; color: #94a3b8; }
+        .sim-btn { padding: 10px 20px; border: none; border-radius: 12px; font-weight: 600; font-family: 'Outfit', sans-serif; cursor: pointer; transition: all 0.3s ease; color: white; font-size: 0.95rem; }
+        .sim-btn:hover { transform: translateY(-2px); }
+        .sim-btn-orange { background: linear-gradient(135deg, #f97316, #fb923c); box-shadow: 0 4px 15px rgba(249,115,22,0.3); }
+        .sim-btns-row { display: flex; gap: 8px; flex-wrap: wrap; }
+        .sim-badge { display: inline-block; padding: 3px 10px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; background: rgba(251,191,36,0.15); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+        .charge-btns { display: flex; gap: 6px; }
+        .charge-btns button { padding: 6px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: white; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 0.85rem; transition: all 0.3s ease; }
+        .charge-btns button:hover { background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.4); }
+        .charge-btns button.active { background: rgba(56,189,248,0.2); border-color: #38bdf8; color: #38bdf8; }
+        .sim-theory { background: rgba(15,23,42,0.5); border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 1.5rem; margin-top: 1.5rem; }
+        .sim-theory h3 { margin: 0 0 10px; font-size: 1.1rem; }
+        .sim-theory p { font-size: 0.88rem; color: #94a3b8; line-height: 1.7; margin: 0 0 10px; }
+        .key-point { display: flex; align-items: flex-start; gap: 8px; padding: 10px 14px; background: rgba(251,191,36,0.05); border-left: 3px solid #fbbf24; border-radius: 0 10px 10px 0; margin: 10px 0; }
+        .key-point p { margin: 0; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <div class="watermark" aria-hidden="true">jimitportal.web.app</div>
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="header-logo">
+                <a href="../index.html" class="back-link">All Simulations</a>
+                <div class="logo-divider"></div>
+                <div class="logo-text">
+                    <span class="logo-title">Electric Field Visualizer</span>
+                    <span class="logo-sub">Coulomb's Law in Action</span>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="https://jimitportal.web.app" target="_blank" rel="noopener" class="nav-link">My Portal</a>
+                <a href="https://github.com/Jimit21/physics-simulations" target="_blank" rel="noopener" class="nav-link">GitHub</a>
+                <a href="https://jimitportal.web.app/booking.html" target="_blank" rel="noopener" class="nav-link nav-link-cta">Book Session</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="sim-page-wrap">
+        <h1 style="font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; margin: 0 0 0.5rem; color: #fbbf24;">Electric Field Visualizer <span class="sim-badge">Interactive</span></h1>
+        <p style="color: #64748b; font-size: 0.95rem; line-height: 1.6; margin: 0 0 1.5rem;">Click to place positive or negative charges on the canvas. Drag charges to rearrange them and observe the electric field lines respond in real-time.</p>
+
+        <div class="sim-card">
+            <div class="sim-canvas-wrap"><canvas id="fieldCanvas" width="820" height="450"></canvas></div>
+            <div class="sim-controls">
+                <p style="font-size:0.85rem;color:#94a3b8;margin:0 0 6px">Click canvas to place charges. Drag to move.</p>
+                <div class="charge-btns">
+                    <button class="active" id="btn-pos" onclick="setChargeType(1)">+ Positive</button>
+                    <button id="btn-neg" onclick="setChargeType(-1)">- Negative</button>
+                </div>
+                <div class="sim-btns-row">
+                    <button class="sim-btn sim-btn-orange" onclick="resetField()">Reset Field</button>
+                </div>
+                <div class="sim-readout">
+                    <p>Charges: <strong id="out-charges">0</strong></p>
+                    <p>Click to add, drag to move</p>
+                </div>
+            </div>
+            <div class="sim-formula">$$ \vec{E} = k_e \frac{q}{r^2} \hat{r} \;\;\;\; k_e = 8.99 \times 10^9 $$</div>
+        </div>
+
+        <div class="sim-theory">
+            <h3>Theory -- Electric Fields</h3>
+            <p>An electric field is created by electric charges and exerts a force on other charges in the region. Field lines point <strong style="color:#fbbf24">away from positive charges</strong> and <strong style="color:#3b82f6">toward negative charges</strong>.</p>
+            <div class="key-point"><p>Field strength (E) is <strong>inversely proportional to r squared</strong> -- it weakens with distance. Between a positive and negative charge (dipole), field lines form characteristic curves from positive to negative.</p></div>
+            <div class="key-point"><p><strong>Superposition principle:</strong> The total field is the vector sum of fields from each charge. Add multiple charges and observe how the net field changes direction and magnitude everywhere.</p></div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <span><strong>Electric Field Visualizer</strong></span>
+                <span>by <a href="https://jimitportal.web.app" target="_blank" rel="noopener">Jimit Pandya</a> | MSc Physics, B.Ed</span>
+            </div>
+            <div class="footer-right">
+                <a href="https://github.com/Jimit21/physics-simulations" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://jimitportal.web.app/booking.html" target="_blank" rel="noopener">Hire Me</a>
+                <a href="https://jimitportal.web.app" target="_blank" rel="noopener">My Portal</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../shared/shared.js"></script>
+    <script src="efield-sim.js"></script>
+</body>
+</html>

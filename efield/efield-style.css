@@ -1,0 +1,106 @@
+/* ============================================================
+   ELECTRIC FIELD VISUALIZER — Specific Styles
+   ============================================================ */
+
+/* Canvas gradient background */
+#fieldCanvas {
+    background: radial-gradient(ellipse at 50% 50%, #0d1a2f 0%, #080d1a 70%);
+}
+
+/* Charge selector toggle buttons */
+.charge-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+    margin-top: 0.4rem;
+}
+
+.charge-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.4rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-sm);
+    color: var(--text-white);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Outfit', sans-serif;
+}
+
+.charge-btn:hover {
+    background: rgba(56,189,248,0.08);
+    border-color: rgba(56,189,248,0.2);
+}
+
+.charge-btn.active {
+    background: rgba(56,189,248,0.15);
+    border-color: rgba(56,189,248,0.4);
+    color: var(--accent-blue);
+}
+
+/* Positive charge active state override */
+.charge-btn[data-charge="1"].active {
+    background: rgba(239,68,68,0.12);
+    border-color: rgba(239,68,68,0.4);
+    color: #ef4444;
+}
+
+/* Negative charge active state override */
+.charge-btn[data-charge="-1"].active {
+    background: rgba(59,130,246,0.12);
+    border-color: rgba(59,130,246,0.4);
+    color: #3b82f6;
+}
+
+/* Action button */
+.action-btn {
+    width: 100%;
+    padding: 0.55rem 1rem;
+    background: linear-gradient(135deg, #f97316, #fb923c);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 0.4rem;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(249,115,22,0.3);
+}
+
+/* Control hint text */
+.control-hint {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Formula block in panel */
+.formula-block {
+    text-align: center;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.formula-note {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+}
+
+/* Smaller result value variant */
+.result-value-small {
+    font-size: 0.88rem;
+}
